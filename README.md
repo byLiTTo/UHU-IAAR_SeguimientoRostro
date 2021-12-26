@@ -32,9 +32,7 @@ Esto sería el kit básico de la placa, pero como hemos mencionado, necesitamos 
 
 <p align="left">
         <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/2.Hardware.tiff" width="150"/>
-    <h1 align="right">
         <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/3.Cam.tiff" width="150"/>
-    </h1>
 </p>   
 
 En cuanto a este apartado no vamos a aportar más información, ya que hay muchísimas posibilidades de configuración y se pueden utilizar componentes diferentes a los que hemos usado. Se los han facilitado las placas ya previamente armadas y conectadas por lo que nos vamos a centrar en la fase de desarrollo, más que en la de montaje y preparación de Hardware.   
