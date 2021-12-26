@@ -143,3 +143,107 @@ Para hacer el efecto barrido solo es necesario hacer un bucle en el sentido hori
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/19.tiff"/>   
 
 Si ejecutamos en script IAAR-MovimientoServo.py podremos ver todo esto en acción.
+
+## Seguimiento de un objeto
+En este apartado vamos a explicar cómo podemos hacer que el servo haga un tracking de un objeto. Siguiendo un tutorial sobre el tema, se nos explica cómo poder hacer tracking de un objeto según su color, en otras palabras, si nuestro objeto es azul, hacer un tracking de la zona que detecta la cámara con dicho color. Una vez encontrada dicha zona nos quedamos con el rectángulo de menor área que abarca toda la zona, es decir, su bounding box. A partir de este bbox encontramos su punto central y ese será el lugar a donde tiene que apuntar nuestro servo. Por lo que el siguiente paso sería calcular los ángulos necesarios para apuntar a dicha zona ya mover nuestro servo con lo que ya hemos aprendido.   
+
+### Instalaciones previas
+Dos de las tres instalaciones necesarias ya la hemos realizado en los anteriores pasos, se tratan de las librerías OpenCV y Adafruit para ServoKit. La tercera librería que vamos a usar es Numpy.   
+```
+alumno2@jetson-2:~$ sudo apt-get install git cmake libpython3-dev python3-numpy
+```
+
+### Script Seguimiento de color
+Comenzamos a ver todo lo explicado sobre en código. Como siempre primero las importaciones necesarias.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/20.tiff"/>   
+
+Cargamos nuestro servo como hicimos en el otro punto. Y en este caso como queremos seleccionar el color, en el tutorial que seguimos nos enseñaron cómo crear una ventana con barras deslizadoras para escoger los parámetros. Nosotros no vamos a explicarlo, vendrá en el script y dejaremos un enlace a dicho video para mejor comprensión.   
+
+Deberemos configurar los siguientes parámetros: ancho y alto de la ventana y el modo de rotación. Esto último puede varias dependiendo de cómo se haya instalado la cámara, en nuestro caso es 0.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/21.tiff"/>   
+
+A continuación, tenemos que crear nuestra fuente de video, de donde sacaremos los frames que vamos a tratar. En este caso lo estamos haciendo desde cv2 pero más adelante veremos una forma alternativa para usarlo desde jetson.utils, que a nuestro parecer, nos ha resultado más sencillo.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/22.tiff"/>   
+
+Como hemos mencionado, tenemos que obtener un frame para tratarlo y así generar las observaciones sobre él.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/23.tiff"/>   
+
+Mediante CV2 vamos a encontrar los contornos en la imagen que cumplen nuestra condición, la de que sea el color que mediante los parámetros, hemos ajustado. Como puede que encontremos más de uno, vamos a ordenarlo con el criterio de primero los de mayor área, entendiendo que nuestro objeto va a ser la zona donde mayor número de pixeles detectemos como nuestro color y así evitamos pequeñas agrupaciones de pixeles de color similar o incluso pixeles de ruido.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/24.tiff"/>   
+
+Ahora comenzamos un bucle que para cada uno de los contornos detectados, calcularemos su área y su bbox. La función usada para obtener el bounding box nos devuelve su punto de la esquina superior izquierda y su ancho y largo, por lo que nos será fácil calcular la “caja”.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/25.tiff"/>   
+
+Vamos a dibujar el borde de esta caja sobre el frame en cuestión. Para poder aplicar el criterio que mencionamos antes, vamos a hacer un filtrado de las detecciones con área menos que valor 50. Ahora sí, podemos mostrar el rectángulo del bbox, para ello haciendo uso de funciones de cv2, quedaría tal que así:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/26.tiff"/>   
+
+Ahora calcularemos los ángulos necesarios para colocar el servo y poder hacer el tracking. Debemos calcular el centro del bbox, para ello sabiendo su esquina superior izquierda y su alto y ancho, podemos averiguar sus coordenadas X e Y. Según el tutorial, realizar el cálculo de esta forma puede llevar un pequeño error consigo que compensaremos calculando el error de paneo y tilt, es decir los ángulos horizontal y vertical respectivamente.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/27.tiff"/>   
+
+En dichos cálculos podemos pasarnos de rango y obtener valores mayores que los límites, para evitar eso deberemos comprobar el resultado de cada ángulo y si lo sobre pasa, asignarle el valor máximo para evitar errores a la hora de ejecutar.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/28.tiff"/>   
+
+Asignamos la posición como aprendimos anteriormente y mostramos el frame modificado en la ventana correspondiente:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/29.tiff"/>   
+
+Por último, tenemos la opción de cerrar todas las ventanas y finalizar el programa cerrando la cámara:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/30.tiff"/>   
+
+Todo el código se encuentra en el script IAAR-SeguimientoColor.py, a continuación, vamos a ver una captura de cómo se ve el programa en ejecución:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/31.tiff"/>   
+
+### Ejecutar modelo
+En este apartado vamos ya a entrar en la base de conocimiento de este proyecto. Vamos a ejecutar un modelo de reconocimiento de objetos, pero en el repositorio que hemos seguido se encuentran muchas funcionalidades muy interesantes, como modelos de reconocimiento de imagen, segmentación, etc   
+
+Deberemos descargar el repositorio jetson-inference en la carpeta que deseemos:   
+```
+alumno2@jetson-2:~/Descargas$ git clone --recursive https://github.com/dusty-nv/jetson-inference
+```
+
+Después de descargar el repositorio, deberemos instalar varios modelos ya preeentrenados para poder hacer pruebas con ellos, serán de varios tipos de campos de aplicación. Nosotros hemos descargado los indicados en el tutorial que hemos dejado en el bibliografía, pero realmente hemos usado únicamente los del tipo ssd-mobilenet, que más tarde explicaremos su estructura.   
+```
+alumno2@jetson-2:~/Descargas/jetson-inference/build$ cmake ../
+```
+
+Al ejecutar este comando, comenzará a instalar la librería necesaria y abrirá una ventana de instalación de los modelos como la que mostramos:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/32.tiff"/>   
+
+Después de instalar, nos aparecerá otra ventana de instalación de Pytorch. Si hemos seguido todos los tutoriales que hemos facilitado, además de esta memoria, deberemos tener especial cuidado en escoger la versión de Python 3.6 que es en la que hemos desarrollado, si se está usando otra, asegurarse de que es la misma que se tiene instalada en el equipo.   
+
+Deberemos ejecutar algunos comandos más para la configuración de jetson-inference:   
+```
+alumno2@jetson-2:~/Descargas/jetson-inference/build$ make -j$(nproc)
+alumno2@jetson-2:~/Descargas/jetson-inference/build$ sudo make install
+alumno2@jetson-2:~/Descargas/jetson-inference/build$ sudo ldconfig
+alumno2@jetson-2:~/Descargas/jetson-inference/build$ sudo apt-get install v4l-utils
+```
+
+### Script Ejecuta Modelo
+Vamos a ver el código implementado para poder ejecutar un modelo de reconocimiento de objetos preentrenado y que se encuentre en el repositorio jetson-inference o si poseemos otro modelo con una extensión admitida, podremos utilizarlo. Las compatibilidades y modelos admitidos las explicaremos más adelante en otro apartado.   
+
+Las librerías que necesitaremos serán:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/33.tiff"/>   
+
+Lo siguiente es crear un parser de Python para poder cargar los parámetros a la hora de hacer la llamada a guión. En nuestro caso lo hemos configurado para que cargue un modelo que hemos entrenado nosotros mismos, que será uno de los siguientes apartados. En jetson-inference existe un script a modo de ejemplo llamado detectnet.py donde se podrá ver mejor esta parte si lo que se quiere es cargar uno de los modelos preentrenados.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/34.tiff"/>   
+
+Los modelos preentrenados son variados y detectan infinidad de objetos, pero hay algunos específicos para rostros como el facenet:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/35.tiff"/>   
+
+Para cargar el modelo el modelo tenemos que crear un objeto de la clase detectNet, es una de las clases de jetson-inference implementada en Python y C++, en nuestro caso estamos haciendo uso de la versión en Python, la definición es la siguiente:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/36.tiff"/>   
+
+Continuamos creando dos fuentes, una de video que será la que capture los frames de nuestra cámara y otra para generar la salida de video. Para la entrada debemos indicar la cámara y también configuramos la rotación. En puntos anteriores enseñamos cómo hacerlo con la librería OpenCV, esta vez lo haremos con jetson-utils:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/37.tiff"/>   
+
+Finalmente creamos un bucle para que todos los frames se estén mostrando por pantalla. Cargaremos un frame, buscaremos las detecciones con el método detect de nuestra red, que tiene la siguiente definición:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/38.tiff"/>   
+
+Como podemos ver, nos devuelve una lista de detecciones. Éstas tienen como atributos los siguientes(los cuales nos han resultado de gran utilidad en la implementación posterior):   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/39.tiff"/>   
+
+La propia función detect se encarga, mediante el tipo de overlay, de representar la información en al frame. Si por ejemplo detecta un plátano en la escena, por defecto dibujará un rectángulo alrededor de la fruta, con el nombre de la clase a la que pertenece la detección y el porcentaje que tiene de pertenecer a dicha clase. Esto en código quedaría de la siguiente manera:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/40.tiff"/>   
+
+Si queremos ejecutar el código, se encuentra implementado en el script IAAR-EjecutaModelo.py, debajo mostramos un ejemplo de cómo se vería la ventana de previsualización generada ejecutando un modelo preentrenado, por defecto se trata del ssd-mobilenet-v2:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/41.tiff"/>   
