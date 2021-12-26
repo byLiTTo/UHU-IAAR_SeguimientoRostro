@@ -88,3 +88,58 @@ Ahora podemos abrirlo y se vería como podemos observar en la imagen, pero nos h
 
 Para poder comenzar a usar la extensión de Python deberemos configurar la versión que vamos a utilizar para ello abrimos una línea de comando y escribimos:   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/13.tiff" width="500"/>   
+
+Más tarde deberemos elegir la versión que deseamos, en nuestro caso la segunda.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/14.tiff" width="500"/>   
+
+Ahora ya podemos crear código y ejecutarlo en la misma ventana. Para poder ejecutarlo basta con hacer click derecho sobre el código y elegir la opción Ejecutar archivo Python en la terminal. Esto hará que en la parte inferior se nos habrá una nueva terminal que ejecuta el código, como podemos ver en el ejemplo de la imagen:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/15.tiff" width="500"/>   
+
+# Desarrollo del Modelo
+Para hacer de forma más intuitiva la explicación de cómo hemos llegado al resultado final, hemos optado por dividir el desarrollo en pequeñas explicaciones de los diferentes conceptos necesarios, por separado, para poder centrarnos en una característica que más tarde combinaremos entre sí para conseguir el proyecto final. Comenzaremos por el movimiento del Servo.   
+
+## Movimiento del servo
+Para el movimiento del servo tenemos pensado que éste barra la zona cuando no encuentre un rostro humano. Lo que necesitamos por ahora es conocer cómo funciona el posicionamiento del servo.   
+
+### Instalaciones previas
+Para poder hacer uso del servo, deberemos realizar una serie de instalaciones previas, como por ejemplo pip de Python3, o descargar una librería para controlar el posicionamiento.   
+
+Lo primero será instalar python3-pip si no lo tenemos ya instalado:   
+```
+alumno2@jetson-2:~$ sudo apt-get install python3-pip
+```
+
+Una vez instalado pip, deberemos instalar la librería para poder operar con las piezas del servo y por tanto manejar su posicionamiento:   
+```
+alumno2@jetson-2:~$ sudo pip3 install adafruit-circuitpython-servokit
+```
+
+También vamos a necesitar instalar la librería OpenCV para python3:   
+```
+alumno2@jetson-2:~$ sudo apt-get install python3-opencv
+```
+
+A continuación, deberemos de hacer una serie de configuraciones en carpetas internas de Nvidia y otras más que no entraremos en detalle de su funcionamiento. Hemos seguido un tutorial donde se explica más a fondo, lo dejaremos en la bibliografía:   
+```
+alumno2@jetson-2:~$ sudo usermod -aG i2C pjm
+alumno2@jetson-2:~$ sudo groupadd -f -r gpio
+alumno2@jetson-2:~$ sudo usermod -a -G gpio pjm
+alumno2@jetson-2:~$ sudo cp /opt/nvidia/jetson-gpio/etc/99-gpio.rules /etc/udev/rules.d
+alumno2@jetson-2:~$ sudo udevadm control –reload-rules && sudo udevadm trigger
+alumno2@jetson-2:~$ sudo reboot now
+```
+
+### Script para movimiento del servo
+Para empezar deberemos importar las siguiente librerías (si no contamos con alguna de ellas en la bibliografía aparecerán enlaces a tutoriales para su instalación):   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/16.tiff" width="500"/>   
+
+Nos crearemos una variable para el servo, éste será nuestro objeto con el cual realizaremos las llamadas para cambiar el posicionamiento. Como vemos la función necesita como parámetro el número de canales, en nuestro caso siempre es 16 y es con el que hemos tenido mejor funcionamiento.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/17.tiff" width="500"/>   
+
+Para seleccionar la posición debemos manejar dos parámetros que corresponden al ángulo horizontal y al ángulo vertical. En la imagen podemos ver como servo[0] corresponde con el horizontal y servo[1] con el vertical. En este caso hemos seleccionado como posición inicial el ángulo 0º horizontal y 60º vertical.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/18.tiff" width="500"/>   
+
+Para hacer el efecto barrido solo es necesario hacer un bucle en el sentido horizontal desde el ángulo mínimo hasta el máximo y si se desea, pues retroceder invirtiendo el bucle inicial:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/19.tiff" width="500"/>   
+
+Si ejecutamos en script IAAR-MovimientoServo.py podremos ver todo esto en acción.
