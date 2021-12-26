@@ -81,10 +81,10 @@ alumno2@jetson-2:~/Descargas$ sudo dpkg -i code-oss_1.32.3-arm64.deb
 ```
 
 Ahora podemos abrirlo y se vería como podemos observar en la imagen, pero nos hacen faltan una serie de extensiones para poder editar y lanzar nuestro código desde el propio VSCode.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/9.tiff" width="300"/>   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/10.tiff" width="300"/>   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/11.tiff" width="300"/>   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/12.tiff" width="300"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/9.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/10.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/11.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/12.tiff" width="500"/>   
 
 Para poder comenzar a usar la extensión de Python deberemos configurar la versión que vamos a utilizar para ello abrimos una línea de comando y escribimos:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/13.tiff" width="300"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/13.tiff" width="500"/>   
