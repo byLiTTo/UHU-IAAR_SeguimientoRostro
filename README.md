@@ -15,7 +15,7 @@ Cabe destacar que la fase de instalación del sistema operativo no fue realizada
 # El dispositivo
 Como hemos mencionado antes, la Jetson cuenta con un sistema operativo basado en Ubuntu, para el desarrollo de la práctica decidimos conectar el equipo a diferentes periféricos para usarlo directamente sobre la propia máquina y no tener que conectarnos remotamente para manejarla. Esto más tarde nos trajo muchas facilidades a la hora de visualizar la cámara y hacer de forma más rápidas diferentes pruebas y ajustes.   
 
-![][1]
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/1.Jetson.tiff" width="300px">
 
 Como podemos observar tiene varias entradas, de las cuales nosotros usaremos:
 - HDMI: Para poder visualizar en una pantalla externa la interfaz gráfica.
