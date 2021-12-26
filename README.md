@@ -354,17 +354,17 @@ Aunque tiene algunas limitaciones, que pueden consultarse en su página de FAQ, 
 
 Con colab se pueden crear notebooks o importar los que ya tengamos creados, además de compartirlos y exportarlos cuando queramos. Esta fluidez a la hora de manejar la información también es aplicable a las fuentes de datos que usemos en nuestros proyectos, de modo que podremos trabajar con información contenida en nuestro propio Google Drive, unidad de almacenamiento local, github e incluso otros sistemas de almacenamiento cloud, como S3 de Amazon.   
 
-Para empezar a trabajar con colab, tendremos que tener una cuenta de Google y acceder al servicio Google Drive. Una vez dentro, le daremos a Nuevo > Carpeta, poniéndolo el nombre que queremos, por ejemplo: “IAAR-Colab”.
+Para empezar a trabajar con colab, tendremos que tener una cuenta de Google y acceder al servicio Google Drive. Una vez dentro, le daremos a Nuevo > Carpeta, poniéndolo el nombre que queremos, por ejemplo: “IAAR-Colab”.   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/57.tiff"/>   
 
-Para crear nuestro primer Colab, entraremos dentro de la carpeta que hemos creado y daremos a Nuevo > Más > Colaboratory, a continuación, se abrirá un nuevo notebook:
+Para crear nuestro primer Colab, entraremos dentro de la carpeta que hemos creado y daremos a Nuevo > Más > Colaboratory, a continuación, se abrirá un nuevo notebook:   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/58.tiff"/>   
 
-Una vez hecho esto, hay que establecer el entorno de ejecución: pestaña Entorno de ejecución > Cambiar tipo de entorno de ejecución, tras lo que se abrirá la siguiente ventana:
+Una vez hecho esto, hay que establecer el entorno de ejecución: pestaña Entorno de ejecución > Cambiar tipo de entorno de ejecución, tras lo que se abrirá la siguiente ventana:   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/59.tiff"/>   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/60.tiff"/>   
 
-En nuestro caso indicaremos Python 3 y GPU. Para cargar los datos usaremos la opción de Google drive, para ello, ejecutaremos el código que aparece en la imagen. Nos aparecerá una URL a la que debemos entrar para iniciar sesión con la cuenta que deseemos vincular, ya que puede ser una distinta a propietaria del Colab. Nos dará un código de verificación que deberemos pegar en el campo de texto y una vez realizado con éxito todos estos pasos se deberían de ver como en la siguiente imagen:
+En nuestro caso indicaremos Python 3 y GPU. Para cargar los datos usaremos la opción de Google drive, para ello, ejecutaremos el código que aparece en la imagen. Nos aparecerá una URL a la que debemos entrar para iniciar sesión con la cuenta que deseemos vincular, ya que puede ser una distinta a propietaria del Colab. Nos dará un código de verificación que deberemos pegar en el campo de texto y una vez realizado con éxito todos estos pasos se deberían de ver como en la siguiente imagen:   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/61.tiff"/>   
 
 Ahora para poder realizar el entrenamiento de forma correcta solo deberemos subir a nuestro drive la carpeta ssd, del repositorio jetson-inference para poder trabajar con los scritps que se encuentran en dicha carpeta.   
@@ -378,10 +378,10 @@ Una vez entrenado nuestro modelo, solo hay que descargarlo en la memoria local d
 ___
 
 # Resultado y Conclusiones
-Uno de los problemas que encontramos en la fase de desarrollo era el cambio del modo sondeo a cambio de modo tracking. Debido a las vibraciones que generan los motores del servo, la imagen se distorsionaba y durante el cambio de posición encontraba otras detecciones, que cuando resultaban ser mayores que las de nuestra cara, hacían que el servo entrase en un bucle de cambio de posición, en otras palabras, se volvía loco. Esto se solucionó añadiendo un sleep al sondeo, así entre incremento de su posición horizontal y el siguiente, pasaba más tiempo y hacía un movimiento más suave, reduciendo las vibraciones, pero esto solo no fue suficiente, el cambio sustancial vino con un reentreno, es decir, cambiamos el modelo que estábamos usando.
+Uno de los problemas que encontramos en la fase de desarrollo era el cambio del modo sondeo a cambio de modo tracking. Debido a las vibraciones que generan los motores del servo, la imagen se distorsionaba y durante el cambio de posición encontraba otras detecciones, que cuando resultaban ser mayores que las de nuestra cara, hacían que el servo entrase en un bucle de cambio de posición, en otras palabras, se volvía loco. Esto se solucionó añadiendo un sleep al sondeo, así entre incremento de su posición horizontal y el siguiente, pasaba más tiempo y hacía un movimiento más suave, reduciendo las vibraciones, pero esto solo no fue suficiente, el cambio sustancial vino con un reentreno, es decir, cambiamos el modelo que estábamos usando.   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/62.tiff"/>   
 
-Como hemos explicado, hemos usado Google Colab para realizar nuestros modelos, esto se debe a que primeramente entrenamos en la Jetson Nano, debido a las limitaciones técnicas hicimos una ejecución de un modelo con 5.000 imágenes y 2 generaciones, lo que no fue suficiente porque los ocurría, que en nuestra pared de fondo, tenemos colgada una guitarra y nos la detecta como cara humana:
+Como hemos explicado, hemos usado Google Colab para realizar nuestros modelos, esto se debe a que primeramente entrenamos en la Jetson Nano, debido a las limitaciones técnicas hicimos una ejecución de un modelo con 5.000 imágenes y 2 generaciones, lo que no fue suficiente porque los ocurría, que en nuestra pared de fondo, tenemos colgada una guitarra y nos la detecta como cara humana:   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/63.tiff"/>   
 
 Esto, además de significar que nuestro modelo no reconoce del todo bien a las personas, nos trajo un problema en el cual no caímos, qué debe hacer nuestro programa cuando detecte a dos personas y realmente sean dos personas.   
@@ -396,20 +396,20 @@ ___
 
 # Resumen de los entrenamientos
 ## Modelo 15 Épocas y 10.000 imágenes
-El primer modelo que presentamos consta de: 10.000 imágenes de entrenamiento y 15 épocas. Hemos creado sus gráficas de evolución para poder entender cómo fue su proceso de entrenamiento:
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/64.tiff"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/65.tiff"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/66.tiff"/>   
+El primer modelo que presentamos consta de: 10.000 imágenes de entrenamiento y 15 épocas. Hemos creado sus gráficas de evolución para poder entender cómo fue su proceso de entrenamiento:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/64.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/65.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/66.tiff" width="300px">   
 
 Este modelo ya nos aportaba unos resultado realmente mejorados, la detección de la guitarra como falso positivo solo ocurría en contadas veces, podría ser debido a que la guitarra tiene dos piezas circulares de una proximidad simular a la de los ojos, pusimos un pañuelo sobre ellos y efectivamente el error se corrigió, pero quisimos ser más técnicos y hacer un mejor modelo aún, por lo que decidimos aumentar el número de épocas.   
 
 ## Modelo 25 Épocas y 10.000 imágenes
-El segundo modelo consta de 25 épocas y 10.000 imágenes, en cuanto a la ejecución sí vimos una leve mejora en falsos positivos, pero en las gráficas observamos un “Overfitting” por lo que decidimos realizar otro entrenamiento con el objetivo de hacer uso de un modelo que nos dé buenos resultados y unas gráficas correctas.
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/67.tiff"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/68.tiff"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/69.tiff"/>   
+El segundo modelo consta de 25 épocas y 10.000 imágenes, en cuanto a la ejecución sí vimos una leve mejora en falsos positivos, pero en las gráficas observamos un “Overfitting” por lo que decidimos realizar otro entrenamiento con el objetivo de hacer uso de un modelo que nos dé buenos resultados y unas gráficas correctas.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/67.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/68.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/69.tiff" width="300px">   
 
 ## Modelo 30 Épocas y 10.000 imágenes
 Nuestro último modelo es el que hemos utilizado para mover el programa final. Se trata de un modelo con 30 épocas y 10.000 imágenes de entrenamiento. Nos solucionó por completo nuestro problema de falsos positivos, al menos en nuestra zona de desarrollo, no hemos podido comprobar los resultados en otros espacios porque no nos fue posible, aunque nos hubiera gustado poder recopilar datos y hacer una comparativo en distintas salas y generar gráficas comparativas de falsos positivos entre los distintos modelos.   
 
-Las gráficas de este modelo nos han parecido muy correctas y coherentes, por ello no quisimos realizar ningún otro entrenamiento con mayores números. Aunque podría haber sido interesante de cara a saber si realmente merece la pena invertir tanto tiempo en un entrenamiento y la mejoría en cuanto a resultados.
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/70.tiff"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/71.tiff"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/72.tiff"/>   
+Las gráficas de este modelo nos han parecido muy correctas y coherentes, por ello no quisimos realizar ningún otro entrenamiento con mayores números. Aunque podría haber sido interesante de cara a saber si realmente merece la pena invertir tanto tiempo en un entrenamiento y la mejoría en cuanto a resultados.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/70.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/71.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/72.tiff" width="300px">   
 
 ___
 
