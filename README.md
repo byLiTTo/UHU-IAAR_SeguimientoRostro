@@ -3,6 +3,8 @@
 :school: Universidad de Huelva.  
 :books: Curso 2020/2021.  
 
+___
+
 # Introducción
 En este proyecto consiste en el desarrollo de un modelo capaz de reconocer un rostro humano y seguirle para que la imagen esté siempre centrada en él.   
 
@@ -11,6 +13,8 @@ Para conseguir esto, se nos ha facilitado una placa Nvidia Jetson Nano, junto co
 Esta tarjeta cuenta con un sistema operativo basado en Ubuntu, por lo que la fase de implementación ha resultado similar al uso de un equipo sobremesa o portátil tradicional. Ha sido necesario la instalación de varias librerías y repositorios que iremos comentando a lo largo de la memoria.   
 
 Cabe destacar que la fase de instalación del sistema operativo no fue realizada por nosotros por lo que no aparecerá explicado, pero para cualquier duda sobre ello en el propio foro de nvidia existen tutoriales que sirven como guía.   
+
+___
 
 # El dispositivo
 Como hemos mencionado antes, la Jetson cuenta con un sistema operativo basado en Ubuntu, para el desarrollo de la práctica decidimos conectar el equipo a diferentes periféricos para usarlo directamente sobre la propia máquina y no tener que conectarnos remotamente para manejarla. Esto más tarde nos trajo muchas facilidades a la hora de visualizar la cámara y hacer de forma más rápidas diferentes pruebas y ajustes.   
@@ -94,6 +98,8 @@ Más tarde deberemos elegir la versión que deseamos, en nuestro caso la segunda
 
 Ahora ya podemos crear código y ejecutarlo en la misma ventana. Para poder ejecutarlo basta con hacer click derecho sobre el código y elegir la opción Ejecutar archivo Python en la terminal. Esto hará que en la parte inferior se nos habrá una nueva terminal que ejecuta el código, como podemos ver en el ejemplo de la imagen:   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/15.tiff" width="500"/>   
+
+___
 
 # Desarrollo del Modelo
 Para hacer de forma más intuitiva la explicación de cómo hemos llegado al resultado final, hemos optado por dividir el desarrollo en pequeñas explicaciones de los diferentes conceptos necesarios, por separado, para poder centrarnos en una característica que más tarde combinaremos entre sí para conseguir el proyecto final. Comenzaremos por el movimiento del Servo.   
@@ -297,19 +303,21 @@ Si no hemos detectado ningún rostro, el servo comienza a barrer la zona movién
 Esto sería todo el código final, para poder ejecutarlo deberemos usar el script IAAR-SeguimientoModelo.py. Como muestra de la ejecución podemos ver la siguiente imagen:   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/54.tiff"/>   
 
-## Re-Entrenar modelo SSD
+___
+
+# Re-Entrenar modelo SSD
 Como ya hemos nombrado antes, existen varios modelos ya establecidos en el repositorio, pero éste cuenta con un script para preentrenar modelos con las características que nosotros queramos, en este caso se hace uso del modelo mobilenet-v1-ssd-mp-0_675.pth que ya nos viene descargado en la carpeta Python/training/detection/ssd/models. Para ubicarnos un poco más en situación vamos a explicar qué es esto de modelo ssd.   
 
-### Modelo SSD
+## Modelo SSD
 Es un tipo de modelo que vamos a utilizar para entrenar el nuestro propio, concretamente se lo vamos a usar para detección de objetos. Vamos a utilizar Pytorch y el conjunto de datos de Open Images. SDD-MobileNet es una arquitectura de red que es bastante popular para la detección de objetos en tiempo real para dispositivos móviles y dispositivos integrados, combina el detector SSD-300 Single-Shot MultiBox con una red troncal de Mobilenet (que es una red neuronal convolucional para aplicaciones de visión móvil).   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/55.tiff"/>   
 
-### Configuración y entrenamiento
+## Configuración y entrenamiento
 A continuación, vamos a configurar el entrenamiento y descargar todo lo necesario para conseguirlo, pero antes queremos informar de algunas cosas a tener en cuenta y que hemos querido compartir porque ha sido una de las claves de este proyecto.   
 
 La Jetson Nano posee unas claras limitaciones físicas a nivel de Hardware para poder realizar entrenamientos intensos y de buenos resultados, es por ello que hemos buscado una alternativa para realizar mejores entrenamientos y manejando cantidades de datos mayores. Vamos a explicar ambas alternativas para que el usuario decida bajo su propio criterio cuál se ajusta más a sus necesidades.   
 
-### Entrenamiento en Jetson Nano
+## Entrenamiento en Jetson Nano
 Esta es la opción más directa y sencilla, ya que contamos con todo lo necesario en nuestro dispositivo al descargar el repositorio, solo necesitaremos como extra cargar datos de imágenes para entrenamiento.   
 
 Como configuración previa, podríamos hacer uso de un Docker container que ya nos viene con el repositorio si no quisiéramos instalar en nuestro sistema los requerimientos, etc… Si este es vuestro caso, este paso os lo podéis saltar, esto es para aquellos que no quieran hacer uso del Docker. Deberemos ejecutar los siguientes comandos por consola.   
@@ -336,7 +344,7 @@ alumno2@jetson-2:~$ python3 onnx_export.py --model-dir=models/faces5
 
 Para procesar nuestro modelo solo bastaría con asegurarnos que en la función de cargar el modelo, dentro del script IAAR-SeguimientoModelo.py, se encuentra la ruta correcta al modelo que acabamos de entrenar y exportar. Con esto podremos disfrutar de nuestro modelo entrenado.   
 
-### Entrenamiento Google Colab
+## Entrenamiento Google Colab
 Como hemos mencionado la Jetson posee unas limitaciones, es por ello que decidimos buscar una alternativa para un mejor entrenamiento y con mayor potencia computacional, es por ello que usamos la plataforma Google Colab.   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/56.tiff"/>   
 
@@ -366,3 +374,72 @@ También deberemos descargar las imágenes de entrenamiento, pero subirlas al dr
 Los comandos de consola Linux se ejecutan con “!” antes de cada línea. Teniendo esto en cuenta la forma de entrenar es exactamente la misma que en la jetson solo que cambiarán las rutas de los ficheros y directorios, por lo demás se ejecuta igual.   
 
 Una vez entrenado nuestro modelo, solo hay que descargarlo en la memoria local de la jetson y ponerlo en un lugar controlado, nosotros hemos creído oportuno colocarlo en la carpeta models dentro de ssd.  
+
+___
+
+# Resultado y Conclusiones
+Uno de los problemas que encontramos en la fase de desarrollo era el cambio del modo sondeo a cambio de modo tracking. Debido a las vibraciones que generan los motores del servo, la imagen se distorsionaba y durante el cambio de posición encontraba otras detecciones, que cuando resultaban ser mayores que las de nuestra cara, hacían que el servo entrase en un bucle de cambio de posición, en otras palabras, se volvía loco. Esto se solucionó añadiendo un sleep al sondeo, así entre incremento de su posición horizontal y el siguiente, pasaba más tiempo y hacía un movimiento más suave, reduciendo las vibraciones, pero esto solo no fue suficiente, el cambio sustancial vino con un reentreno, es decir, cambiamos el modelo que estábamos usando.
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/62.tiff"/>   
+
+Como hemos explicado, hemos usado Google Colab para realizar nuestros modelos, esto se debe a que primeramente entrenamos en la Jetson Nano, debido a las limitaciones técnicas hicimos una ejecución de un modelo con 5.000 imágenes y 2 generaciones, lo que no fue suficiente porque los ocurría, que en nuestra pared de fondo, tenemos colgada una guitarra y nos la detecta como cara humana:
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/63.tiff"/>   
+
+Esto, además de significar que nuestro modelo no reconoce del todo bien a las personas, nos trajo un problema en el cual no caímos, qué debe hacer nuestro programa cuando detecte a dos personas y realmente sean dos personas.   
+
+El problema de qué hacer cuando hay dos personas tuvo fácil solución, comprobamos qué detección tiene mayor área y esa será a la que hagamos tracking. Esto lo pensamos porque damos por hecho que si se detecta una cara, y es un real positivo, la cara con mayor área, será la que se encuentre más cerca de la cámara, por lo que es la de mayor interés.   
+
+El problema de los falsos positivos no tuvo otra solución que hacer un mejor entrenamiento, esta vez desde Google Colab, con una cantidad mayor de datos y una cantidad mayor de épocas.   
+
+Realizamos varios entrenamientos, pero debido a un problema de tiempo de uso de Colab, no pudimos salvarlos todos, solo conseguimos ejecutar correctamente 3 de ellos. Colab tiene una limitación de tiempo de uso activo y a veces lo sobre pasamos.   
+
+___
+
+# Resumen de los entrenamientos
+## Modelo 15 Épocas y 10.000 imágenes
+El primer modelo que presentamos consta de: 10.000 imágenes de entrenamiento y 15 épocas. Hemos creado sus gráficas de evolución para poder entender cómo fue su proceso de entrenamiento:
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/64.tiff"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/65.tiff"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/66.tiff"/>   
+
+Este modelo ya nos aportaba unos resultado realmente mejorados, la detección de la guitarra como falso positivo solo ocurría en contadas veces, podría ser debido a que la guitarra tiene dos piezas circulares de una proximidad simular a la de los ojos, pusimos un pañuelo sobre ellos y efectivamente el error se corrigió, pero quisimos ser más técnicos y hacer un mejor modelo aún, por lo que decidimos aumentar el número de épocas.   
+
+## Modelo 25 Épocas y 10.000 imágenes
+El segundo modelo consta de 25 épocas y 10.000 imágenes, en cuanto a la ejecución sí vimos una leve mejora en falsos positivos, pero en las gráficas observamos un “Overfitting” por lo que decidimos realizar otro entrenamiento con el objetivo de hacer uso de un modelo que nos dé buenos resultados y unas gráficas correctas.
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/67.tiff"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/68.tiff"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/69.tiff"/>   
+
+## Modelo 30 Épocas y 10.000 imágenes
+Nuestro último modelo es el que hemos utilizado para mover el programa final. Se trata de un modelo con 30 épocas y 10.000 imágenes de entrenamiento. Nos solucionó por completo nuestro problema de falsos positivos, al menos en nuestra zona de desarrollo, no hemos podido comprobar los resultados en otros espacios porque no nos fue posible, aunque nos hubiera gustado poder recopilar datos y hacer una comparativo en distintas salas y generar gráficas comparativas de falsos positivos entre los distintos modelos.   
+
+Las gráficas de este modelo nos han parecido muy correctas y coherentes, por ello no quisimos realizar ningún otro entrenamiento con mayores números. Aunque podría haber sido interesante de cara a saber si realmente merece la pena invertir tanto tiempo en un entrenamiento y la mejoría en cuanto a resultados.
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/70.tiff"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/71.tiff"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/72.tiff"/>   
+
+___
+
+# Conclusiones
+Este proyecto nos ha resultado de lo más interesante, hemos abarcado varias técnicas estudiadas a lo largo del curso, conceptos estudiados en otras asignaturas como Aprendizaje Automático, Visión por computador, Sistemas de percepción, … Todo ello con la posibilidad de no tener que ser muy técnicos, pero sin dejar cerrada la posibilidad de que cada uno profundice hasta donde considere oportuno.   
+
+Al usar un gran número de imágenes y un alto número de épocas, nos hemos asegurado de que nuestro modelo aprenda con gran éxito a reconocer caras humanas, de hecho los porcentajes en las pruebas realizadas en nuestra sala, alcanzaban valores muy altos, cercanos al 100% en la mayoría de ocasiones y no detectábamos falsos positivos, o si los había era en momentos muy puntuales.   
+
+No hemos tenido en cuenta el uso de mascarillas, puesto que la descripción que nos dieron del proyecto era detección de caras y al usar la mascarilla prácticamente la mitad del rostro queda cubierto, además que de cogiendo como referencia modelos de desbloqueo facial como los que puede haber en dispositivos móviles, han tenido serios problemas con el uso obligatorio de las mascarillas. No obstante, esto se podría haber solucionado con el uso de fotos de personas haciendo uso de estos elementos en sus caras y haciendo que el modelo aprenda también estos casos.   
+
+Relacionado con esto que acabamos de comentar, una mejora que se nos ocurrió fue añadir un criterio para seleccionar a una persona cuando se encontrase más de una, era la de buscar si había una de ellas sin mascarilla y hacer el tracking a esa persona. No fue posible desarrollarlo debido a la situación personal de poco tiempo disponible para dedicarlo a este proyecto (compaginar estudios con trabajo en una empresa). Pero hubiera sido una funcionalidad muy interesante.   
+
+A nivel personal, este trabajo me ha servido para tomármelo como primera toma de contacto para un futro TFG, ya que entra dentro del campo que me gustaría tratar y de hecho podría servir como base para poder comenzar.
+
+___
+
+# Bibliografía
+[Primera configuración con JetPack](https://cutt.ly/0mVJhzv)
+[Hello World configuración](https://cutt.ly/imVJbAi)
+[Instalando entorno Python](https://cutt.ly/6mVJP5h)
+[Instalación de Matplotlib y Numpy](https://cutt.ly/vmVJH8C)
+[Instalación de OpenCV](https://cutt.ly/FmVJZbg)
+[Prueba de Cámara Pi en Jetson con OpenCV](https://cutt.ly/8mVJMB0)
+[Trackeando objeto mediante contornos](https://cutt.ly/9mVJ4kU)
+[Montando Servo](https://cutt.ly/tmVKqwL)
+[Controlando el servo](https://cutt.ly/1mVKtIg)
+[Trackeando objeto con servo y OpenCV](https://cutt.ly/SmVKuTx)
+[Instalando herramientas NVIDIA detecció objetos](https://cutt.ly/imVKg54)
+[Introducción Deep learning Jetson Nano](https://cutt.ly/4mVKluD)
+[Entrenando modelo de reconocimiento de objetos](https://cutt.ly/NmVKmLD)
+[Repositorio de jetson-inference](https://cutt.ly/hmVKRGs)
+[Google Colab](https://cutt.ly/UmVKPME)
+[Curso, Aprende inteligencia artificial en Jetson Nano](https://cutt.ly/EmVKG1V)
