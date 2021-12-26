@@ -296,3 +296,73 @@ Si no hemos detectado ningún rostro, el servo comienza a barrer la zona movién
 
 Esto sería todo el código final, para poder ejecutarlo deberemos usar el script IAAR-SeguimientoModelo.py. Como muestra de la ejecución podemos ver la siguiente imagen:   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/54.tiff"/>   
+
+## Re-Entrenar modelo SSD
+Como ya hemos nombrado antes, existen varios modelos ya establecidos en el repositorio, pero éste cuenta con un script para preentrenar modelos con las características que nosotros queramos, en este caso se hace uso del modelo mobilenet-v1-ssd-mp-0_675.pth que ya nos viene descargado en la carpeta Python/training/detection/ssd/models. Para ubicarnos un poco más en situación vamos a explicar qué es esto de modelo ssd.   
+
+### Modelo SSD
+Es un tipo de modelo que vamos a utilizar para entrenar el nuestro propio, concretamente se lo vamos a usar para detección de objetos. Vamos a utilizar Pytorch y el conjunto de datos de Open Images. SDD-MobileNet es una arquitectura de red que es bastante popular para la detección de objetos en tiempo real para dispositivos móviles y dispositivos integrados, combina el detector SSD-300 Single-Shot MultiBox con una red troncal de Mobilenet (que es una red neuronal convolucional para aplicaciones de visión móvil).   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/55.tiff"/>   
+
+### Configuración y entrenamiento
+A continuación, vamos a configurar el entrenamiento y descargar todo lo necesario para conseguirlo, pero antes queremos informar de algunas cosas a tener en cuenta y que hemos querido compartir porque ha sido una de las claves de este proyecto.   
+
+La Jetson Nano posee unas claras limitaciones físicas a nivel de Hardware para poder realizar entrenamientos intensos y de buenos resultados, es por ello que hemos buscado una alternativa para realizar mejores entrenamientos y manejando cantidades de datos mayores. Vamos a explicar ambas alternativas para que el usuario decida bajo su propio criterio cuál se ajusta más a sus necesidades.   
+
+### Entrenamiento en Jetson Nano
+Esta es la opción más directa y sencilla, ya que contamos con todo lo necesario en nuestro dispositivo al descargar el repositorio, solo necesitaremos como extra cargar datos de imágenes para entrenamiento.   
+
+Como configuración previa, podríamos hacer uso de un Docker container que ya nos viene con el repositorio si no quisiéramos instalar en nuestro sistema los requerimientos, etc… Si este es vuestro caso, este paso os lo podéis saltar, esto es para aquellos que no quieran hacer uso del Docker. Deberemos ejecutar los siguientes comandos por consola.   
+```
+alumno2@jetson-2:~$ cd jetson-inference/python/training/gation/ssd
+alumno2@jetson-2:~/jetson-inference/python/training/gation/ssd$ wget https://nvidia.box.com/shared/static/djf5w54rjvpqocsiztzaandq1m3avr7c.pth -O models / mobilenet-v1-ssd-mp-0_675.pth
+alumno2@jetson-2:~/jetson-inference/python/training/gation/ssd$ pip3 install -v -r requirements.txt
+```
+
+Después vamos a descargar las imágenes que queramos, nosotros vamos a usar una de las clases que posee Open Imágenes que tiene unas 600, las que nos interesa se llama Human fase y es la que pondremos en el comando de descarga. También podemos limitar la cantidad de imágenes, teniendo en cuenta las limitaciones de la Jetson Nano, recomendamos unas 1.000 fotos para ejecuciones asequibles en cuanto a tiempo de espera, hemos probado entrenamientos con datasets de 5.000 imágenes pero los tiempos de espera eran algo elevados y llegados a ese punto interesa utilizar la otra alternativa de entrenamiento de la que hablaremos.
+```
+alumno2@jetson-2:~$ python3 open_images_downloader.py --max-images=1000 --class-names "Human face" --data=data/faces
+```
+
+Para entrenar el modelo tenemos que ejecutar el script que se encuentra en la carpeta Python/training/detection/ssd. Recomendamos descargar el dataset en esta carpeta también. Para entrenar deberemos indicar dónde se encuentra el dataset, qué modelo queremos cargar, un batch size, nuestra Jetson es la versión de 4Gb, por lo que no recomendamos poner 4, más aún si se está usando conectado a un monitor. Por último indicar el número de épocas que esto será el parámetro con más impacto en la duración del entrenamiento. Para la Jetson y una sesión que no se alargue excesivamente en el tiempo, no deberíamos colocar más de 5 épocas, a no ser que dejemos el dispositivo computando toda una noche, aunque no lo recomendamos ya que seguramente el dispositivo sufra de sobrecalentamiento y no es bueno. Una vez más si se desea realizar más, podremos usar la segunda alternativa.
+```
+alumno2@jetson-2:~$ python3 train_ssd.py –data=data/faces –model-dir=models/faces5 –batch-size=2 –epochs=5
+```
+
+Tras acabar el entrenamiento, lo siguiente que debemos hacer es convertir nuestro modelo a una extensión compatible con detectnet:   
+```
+alumno2@jetson-2:~$ python3 onnx_export.py --model-dir=models/faces5
+```
+
+Para procesar nuestro modelo solo bastaría con asegurarnos que en la función de cargar el modelo, dentro del script IAAR-SeguimientoModelo.py, se encuentra la ruta correcta al modelo que acabamos de entrenar y exportar. Con esto podremos disfrutar de nuestro modelo entrenado.   
+
+### Entrenamiento Google Colab
+Como hemos mencionado la Jetson posee unas limitaciones, es por ello que decidimos buscar una alternativa para un mejor entrenamiento y con mayor potencia computacional, es por ello que usamos la plataforma Google Colab.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/56.tiff"/>   
+
+Colab es un servicio cloud, basado en los Notebooks de Jupyter, que permite el uso gratuito de los GPUs y TPUs de Google, como librerías como: Scikit-learn, Pytorch, TensorFlow, Keras y OpenCV. Todo ello con Python 2.7 y 3.6, que aún no está disponible para R y Scala.   
+
+Aunque tiene algunas limitaciones, que pueden consultarse en su página de FAQ, es una herramienta ideal, no solo para practicar y mejorar nuestros conocimientos en técnicas y herramientas de Data Science, sino también para el desarrollo de aplicaciones (pilotos) de machine learning y Deep learning, sin tener que invertir en recursos hardware o del Cloud.   
+
+Con colab se pueden crear notebooks o importar los que ya tengamos creados, además de compartirlos y exportarlos cuando queramos. Esta fluidez a la hora de manejar la información también es aplicable a las fuentes de datos que usemos en nuestros proyectos, de modo que podremos trabajar con información contenida en nuestro propio Google Drive, unidad de almacenamiento local, github e incluso otros sistemas de almacenamiento cloud, como S3 de Amazon.   
+
+Para empezar a trabajar con colab, tendremos que tener una cuenta de Google y acceder al servicio Google Drive. Una vez dentro, le daremos a Nuevo > Carpeta, poniéndolo el nombre que queremos, por ejemplo: “IAAR-Colab”.
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/57.tiff"/>   
+
+Para crear nuestro primer Colab, entraremos dentro de la carpeta que hemos creado y daremos a Nuevo > Más > Colaboratory, a continuación, se abrirá un nuevo notebook:
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/58.tiff"/>   
+
+Una vez hecho esto, hay que establecer el entorno de ejecución: pestaña Entorno de ejecución > Cambiar tipo de entorno de ejecución, tras lo que se abrirá la siguiente ventana:
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/59.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/60.tiff"/>   
+
+En nuestro caso indicaremos Python 3 y GPU. Para cargar los datos usaremos la opción de Google drive, para ello, ejecutaremos el código que aparece en la imagen. Nos aparecerá una URL a la que debemos entrar para iniciar sesión con la cuenta que deseemos vincular, ya que puede ser una distinta a propietaria del Colab. Nos dará un código de verificación que deberemos pegar en el campo de texto y una vez realizado con éxito todos estos pasos se deberían de ver como en la siguiente imagen:
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/61.tiff"/>   
+
+Ahora para poder realizar el entrenamiento de forma correcta solo deberemos subir a nuestro drive la carpeta ssd, del repositorio jetson-inference para poder trabajar con los scritps que se encuentran en dicha carpeta.   
+
+También deberemos descargar las imágenes de entrenamiento, pero subirlas al drive supone que el entrenamiento funcione de forma lenta, lo que recomendamos es descargarlas en la memoria interna de la máquina que “alquilamos” con Colab, aunque se borre al cerrar sesión, no supone un problema ya que tarda muy poco tiempo en descargar los datos.   
+
+Los comandos de consola Linux se ejecutan con “!” antes de cada línea. Teniendo esto en cuenta la forma de entrenar es exactamente la misma que en la jetson solo que cambiarán las rutas de los ficheros y directorios, por lo demás se ejecuta igual.   
+
+Una vez entrenado nuestro modelo, solo hay que descargarlo en la memoria local de la jetson y ponerlo en un lugar controlado, nosotros hemos creído oportuno colocarlo en la carpeta models dentro de ssd.  
