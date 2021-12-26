@@ -30,10 +30,10 @@ Teóricamente se puede alimentar la placa con un cable micro usb, pero nos ha da
 
 Esto sería el kit básico de la placa, pero como hemos mencionado, necesitamos unas extensiones, aquí es donde entra en juego una segunda placa para controlar el servo y la cámara. En las imágenes podemos ver un ejemplo de cada una de ellas.
 
-<p align="right">
+<p align="left">
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/2.Hardware.tiff" width="300"/>
 </p>
-<p align="left">
+<p align="right">
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/3.Cam.tiff" width="300"/>
 </p>   
 
