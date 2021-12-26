@@ -1,2 +1,0 @@
-# IAAR-SeguimientoRostro
-# IAAR-SeguimientoRostro
