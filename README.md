@@ -36,4 +36,55 @@ En cuanto a este apartado no vamos a aportar más información, ya que hay much�
 Como ya hemos mencionado, este equipo trabajo con el sistema operativo Ubuntu. Recomendamos conectar todos los periféricos antes de dotar de alimentación a la placa.
 Lo primero que veremos al inicio será la típica pantalla de usuario, donde deberemos iniciar con las credenciales facilitados o si hemos realizado nosotros la instalación, el usuario y contraseña que creamos en su momento.
 
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/4.tiff" width="500"/>
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/4.tiff" width="500"/>   
+
+Como lo recomendado antes de empezar a trabajar es asegurarse que el equipo está actualizado, necesitaremos conexión a internet. Si no disponemos de la posibilidad de tener el router cerca de nosotros, podemos usar otro equipo con conexión wifi para hacer de puente. Este ha sido nuestro caso y explicaremos como se puede solucionar desde un equipo Windows.   
+
+## Conexión a internet mediante puente
+Una vez en el equipo que hará de puente lo primero es asegurarnos que tiene conexión por wifi. Dando click derecho en el icono de conexión a internet de la barra de tareas, nos dirigimos a la configuración de red e internet.   
+
+En ella nos dirigimos al apartado de cambiar opciones de adaptador.
+
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/5.tiff" width="300"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/6.tiff" width="300"/>   
+
+Nos aparecerá una ventana con todos los adaptadores disponibles, seleccionamos en deseado y damos botón derecho sobre él y nos vamos a propiedades.   
+
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/7.tiff" width="300"/>   
+
+Una vez en propiedades, nos dirigimos a la pestaña de uso compartido y en el campo de selección ponemos nuestro adaptador ethernet que deberá tener conectado el cable desde nuestro equipo a la jetson. Con esto dotaremos de conexión internet a nuestra placa y podremos navegar por internet y descargar las librerías necesarias.   
+
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/8.tiff" width="300"/>   
+
+## Actualización de la Jetson-NANO
+Para actualizar la placa deberemos ejecutar dos comandos.   
+```
+alumno2@jetson-2:~$ sudo apt-get upgrade
+alumno2@jetson-2:~$ sudo apt-get update
+```
+
+Una vez actualizado podemos comenzar a instalar el entorno de trabajo. Para ello vamos a explicar como instalar un editor de código bastante cómodo, se trata del Visual Studio Code, solo que lo haremos bajo otro nombre, pero en definitiva es dicho programa.   
+
+## Instalación de editor de código
+Lo primero que deberemos hacer es abrir una terminar y dirigirnos a la carpeta de descargas para ejecutar el siguiente comando:   
+```
+alumno2@jetson-2:~/Descargas$ sudo apt-get install curl
+```
+
+Utilizaremos Curl para descargar el siguiente repositorio, que es el que contiene el editor:   
+````
+alumno2@jetson-2:~/Descargas$ curl -L https://github.com/toolboc/vscode/releases/download/1.32.3/code-oss_1.32.3-arm64.deb -o code-oss_1.32.3-arm64.deb
+````
+
+Una vez descargado solo hace falta instalarlo con el siguiente comando, una vez termine podremos disfrutar del editor:   
+```
+alumno2@jetson-2:~/Descargas$ sudo dpkg -i code-oss_1.32.3-arm64.deb
+```
+
+Ahora podemos abrirlo y se vería como podemos observar en la imagen, pero nos hacen faltan una serie de extensiones para poder editar y lanzar nuestro código desde el propio VSCode.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/9.tiff" width="300"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/10.tiff" width="300"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/11.tiff" width="300"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/12.tiff" width="300"/>   
+
+Para poder comenzar a usar la extensión de Python deberemos configurar la versión que vamos a utilizar para ello abrimos una línea de comando y escribimos:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/13.tiff" width="300"/>   
