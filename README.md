@@ -28,8 +28,7 @@ Teóricamente se puede alimentar la placa con un cable micro usb, pero nos ha da
 
 Esto sería el kit básico de la placa, pero como hemos mencionado, necesitamos unas extensiones, aquí es donde entra en juego una segunda placa para controlar el servo y la cámara. En las imágenes podemos ver un ejemplo de cada una de ellas.
 
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/2.tiff" width="300"/>
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/3.tiff" width="300"/>  
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/2.tiff" width="300"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/3.tiff" width="300"/>  
 
 En cuanto a este apartado no vamos a aportar más información, ya que hay muchísimas posibilidades de configuración y se pueden utilizar componentes diferentes a los que hemos usado. Se los han facilitado las placas ya previamente armadas y conectadas por lo que nos vamos a centrar en la fase de desarrollo, más que en la de montaje y preparación de Hardware.   
 
@@ -37,4 +36,4 @@ En cuanto a este apartado no vamos a aportar más información, ya que hay much�
 Como ya hemos mencionado, este equipo trabajo con el sistema operativo Ubuntu. Recomendamos conectar todos los periféricos antes de dotar de alimentación a la placa.
 Lo primero que veremos al inicio será la típica pantalla de usuario, donde deberemos iniciar con las credenciales facilitados o si hemos realizado nosotros la instalación, el usuario y contraseña que creamos en su momento.
 
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/4.tiff" width="300"/>
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/4.tiff" width="500"/>
