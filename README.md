@@ -247,3 +247,52 @@ La propia función detect se encarga, mediante el tipo de overlay, de representa
 
 Si queremos ejecutar el código, se encuentra implementado en el script IAAR-EjecutaModelo.py, debajo mostramos un ejemplo de cómo se vería la ventana de previsualización generada ejecutando un modelo preentrenado, por defecto se trata del ssd-mobilenet-v2:   
 <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/39.tiff"/>   
+
+## Seguimiento de Detección
+En este apartado vamos a explicar el concepto final, cómo vamos a mezclar todos los conocimientos previos y los vamos a poner en común en el mismo script para crear nuestro programa, un script que, a partir de las percepciones de un modelo, haga un tracking de un rostro humano detectado.   
+
+Lo necesario para este punto ya lo hemos explicado, salvo como entrenar a nuestro propio modelo. Realmente esto no es necesario del todo, puesto que podemos usar modelos ya preentrenados que detectan caras o incluso usar un modelo que detecte varios objetos y clasificar la ID de la clase de las caras.   
+
+### Script Seguimiento de modelo
+Comenzamos con las importaciones de las librerías que vamos a necesitar, en este caso son:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/40.tiff"/>   
+
+Para mejor comprensión, hemos dividido el main en varios pasos, donde en cada paso hemos intentado integrar el código en una función, para una mejor claridad y mayor facilidad a la hora de explicarlo.   
+
+Como primer paso nos creamos nuestro objeto servo que ya hemos aprendido a usar en anteriores puntos:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/41.tiff"/>   
+
+Después cargamos la red:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/42.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/43.tiff"/>   
+
+Para poder obtener los frames necesitamos una fuente de entrada, en este caso nuestra cámara, aunque se podría utilizar un video ya grabado. También necesitaremos una fuente de salida, en este caso una ventana en el propio SO, también existen proyecto donde la salida es enviada a otro dispositivo, por ejemplo: retransmisiones en streaming o guardar el video en un servidor, ...   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/44.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/45.tiff"/>   
+
+Vamos a comenzar ya con las detecciones y el movimiento del servo, es por ello que hemos optado por colocar el servo en una posición inicial desde la cual comenzará a barrer la sala donde se encuentre la cámara:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/46.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/47.tiff"/>   
+
+Ahora sí, comenzamos a tratar las detecciones, usando el objeto cámara, capturamos un frame y mediante detect, obtenemos las detecciones que encuentra nuestro modelo en dicho frame. Dentro el método ya creado, tenemos la opción de que mediante el overlay, nos modifique el frame de tal manera de que pinte el bounding box de las detecciones, el nombre de la clase (que en este caso solo será Human fase) y el porcentaje con el que dicha detección pertenece a nuestra clase, todo esto se puede cambiar con las opciones “box”, “label”, “conf”y “none”.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/48.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/49.tiff"/>   
+
+Ahora llegamos a un punto que en función de lo obtenido antes, realizaremos una cosa u otra. Si hemos detectado alguna cara, vamos a buscar la detección con mayor área, esto lo hacemos porque en caso de haber dos personas, vamos a trackear a la más cercana, que suele ser la que mayor área de bbox tenga.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/50.tiff"/>   
+
+Una vez tengamos escogida la detección, podemos usar varios atributos con los que cuenta esta clase, de todos ellos nosotros vamos a utilizar el centro del bbox, el ancho y el alto y su área para crear un criterio de selección de región de interés.   
+
+Aunque existen más atributos que hemos puesto para que puedan ser utilizados para crear criterios alternativos al nuestro:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/51.tiff"/>   
+
+Una vez escogido todo, solo tenemos que mover el servo, para ello calculamos su posición, como ya vimos en anteriores puntos de la memoria:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/52.tiff"/>   
+
+La única diferencia que encontramos en esta función con el método que hemos mencionado, es que anteriormente partíamos de la esquina superior izquierda del bbox de los contornos, pero esta vez la clase Detect ya nos da el centro de ese bounding box, por lo que la dos primeras líneas son solo para renombrar las variables para poder reciclar código. Tras esa pequeña aclaración solo basta utilizar la función para colocar el servo, que es muy simple: se pasa como parámetros los ángulos horizontal y vertical y se asignan al servo. Como ya hemos comprobado en la función calculaPosición, que los ángulos no sobrepasen los límites, no tenemos que preocuparnos por asignar un ángulo mayor que 180 o menos que 0.   
+
+Si no hemos detectado ningún rostro, el servo comienza a barrer la zona moviéndose horizontalmente, primero de izquierda a derecha y luego en sentido contrario.   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/53.tiff"/>   
+
+Esto sería todo el código final, para poder ejecutarlo deberemos usar el script IAAR-SeguimientoModelo.py. Como muestra de la ejecución podemos ver la siguiente imagen:   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/54.tiff"/>   
