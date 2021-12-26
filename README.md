@@ -427,19 +427,19 @@ A nivel personal, este trabajo me ha servido para tomármelo como primera toma d
 ___
 
 # Bibliografía
-[Primera configuración con JetPack](https://cutt.ly/0mVJhzv)
-[Hello World configuración](https://cutt.ly/imVJbAi)
-[Instalando entorno Python](https://cutt.ly/6mVJP5h)
-[Instalación de Matplotlib y Numpy](https://cutt.ly/vmVJH8C)
-[Instalación de OpenCV](https://cutt.ly/FmVJZbg)
-[Prueba de Cámara Pi en Jetson con OpenCV](https://cutt.ly/8mVJMB0)
-[Trackeando objeto mediante contornos](https://cutt.ly/9mVJ4kU)
-[Montando Servo](https://cutt.ly/tmVKqwL)
-[Controlando el servo](https://cutt.ly/1mVKtIg)
-[Trackeando objeto con servo y OpenCV](https://cutt.ly/SmVKuTx)
-[Instalando herramientas NVIDIA detecció objetos](https://cutt.ly/imVKg54)
-[Introducción Deep learning Jetson Nano](https://cutt.ly/4mVKluD)
-[Entrenando modelo de reconocimiento de objetos](https://cutt.ly/NmVKmLD)
-[Repositorio de jetson-inference](https://cutt.ly/hmVKRGs)
-[Google Colab](https://cutt.ly/UmVKPME)
-[Curso, Aprende inteligencia artificial en Jetson Nano](https://cutt.ly/EmVKG1V)
+[Primera configuración con JetPack](https://cutt.ly/0mVJhzv).  
+[Hello World configuración](https://cutt.ly/imVJbAi).  
+[Instalando entorno Python](https://cutt.ly/6mVJP5h).  
+[Instalación de Matplotlib y Numpy](https://cutt.ly/vmVJH8C).  
+[Instalación de OpenCV](https://cutt.ly/FmVJZbg).  
+[Prueba de Cámara Pi en Jetson con OpenCV](https://cutt.ly/8mVJMB0).  
+[Trackeando objeto mediante contornos](https://cutt.ly/9mVJ4kU).  
+[Montando Servo](https://cutt.ly/tmVKqwL).  
+[Controlando el servo](https://cutt.ly/1mVKtIg).  
+[Trackeando objeto con servo y OpenCV](https://cutt.ly/SmVKuTx).  
+[Instalando herramientas NVIDIA detecció objetos](https://cutt.ly/imVKg54).  
+[Introducción Deep learning Jetson Nano](https://cutt.ly/4mVKluD).  
+[Entrenando modelo de reconocimiento de objetos](https://cutt.ly/NmVKmLD).  
+[Repositorio de jetson-inference](https://cutt.ly/hmVKRGs).  
+[Google Colab](https://cutt.ly/UmVKPME).  
+[Curso, Aprende inteligencia artificial en Jetson Nano](https://cutt.ly/EmVKG1V).  
