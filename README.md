@@ -131,15 +131,15 @@ alumno2@jetson-2:~$ sudo reboot now
 
 ### Script para movimiento del servo
 Para empezar deberemos importar las siguiente librerías (si no contamos con alguna de ellas en la bibliografía aparecerán enlaces a tutoriales para su instalación):   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/16.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/16.tiff"/>   
 
 Nos crearemos una variable para el servo, éste será nuestro objeto con el cual realizaremos las llamadas para cambiar el posicionamiento. Como vemos la función necesita como parámetro el número de canales, en nuestro caso siempre es 16 y es con el que hemos tenido mejor funcionamiento.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/17.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/17.tiff"/>   
 
 Para seleccionar la posición debemos manejar dos parámetros que corresponden al ángulo horizontal y al ángulo vertical. En la imagen podemos ver como servo[0] corresponde con el horizontal y servo[1] con el vertical. En este caso hemos seleccionado como posición inicial el ángulo 0º horizontal y 60º vertical.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/18.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/18.tiff"/>   
 
 Para hacer el efecto barrido solo es necesario hacer un bucle en el sentido horizontal desde el ángulo mínimo hasta el máximo y si se desea, pues retroceder invirtiendo el bucle inicial:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/19.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/19.tiff"/>   
 
 Si ejecutamos en script IAAR-MovimientoServo.py podremos ver todo esto en acción.
