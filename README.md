@@ -19,7 +19,7 @@ ___
 # El dispositivo
 Como hemos mencionado antes, la Jetson cuenta con un sistema operativo basado en Ubuntu, para el desarrollo de la práctica decidimos conectar el equipo a diferentes periféricos para usarlo directamente sobre la propia máquina y no tener que conectarnos remotamente para manejarla. Esto más tarde nos trajo muchas facilidades a la hora de visualizar la cámara y hacer de forma más rápidas diferentes pruebas y ajustes.   
 
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/1.tiff" width="300px">
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/1.tiff" width="300px">
 
 Como podemos observar tiene varias entradas, de las cuales nosotros usaremos:
 - HDMI: Para poder visualizar en una pantalla externa la interfaz gráfica.
@@ -32,7 +32,7 @@ Teóricamente se puede alimentar la placa con un cable micro usb, pero nos ha da
 
 Esto sería el kit básico de la placa, pero como hemos mencionado, necesitamos unas extensiones, aquí es donde entra en juego una segunda placa para controlar el servo y la cámara. En las imágenes podemos ver un ejemplo de cada una de ellas.
 
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/2.tiff" width="300"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/3.tiff" width="300"/>  
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/2.tiff" width="300"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/3.tiff" width="300"/>  
 
 En cuanto a este apartado no vamos a aportar más información, ya que hay muchísimas posibilidades de configuración y se pueden utilizar componentes diferentes a los que hemos usado. Se los han facilitado las placas ya previamente armadas y conectadas por lo que nos vamos a centrar en la fase de desarrollo, más que en la de montaje y preparación de Hardware.   
 
@@ -40,7 +40,7 @@ En cuanto a este apartado no vamos a aportar más información, ya que hay much�
 Como ya hemos mencionado, este equipo trabajo con el sistema operativo Ubuntu. Recomendamos conectar todos los periféricos antes de dotar de alimentación a la placa.
 Lo primero que veremos al inicio será la típica pantalla de usuario, donde deberemos iniciar con las credenciales facilitados o si hemos realizado nosotros la instalación, el usuario y contraseña que creamos en su momento.
 
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/4.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/4.tiff" width="500"/>   
 
 Como lo recomendado antes de empezar a trabajar es asegurarse que el equipo está actualizado, necesitaremos conexión a internet. Si no disponemos de la posibilidad de tener el router cerca de nosotros, podemos usar otro equipo con conexión wifi para hacer de puente. Este ha sido nuestro caso y explicaremos como se puede solucionar desde un equipo Windows.   
 
@@ -49,15 +49,15 @@ Una vez en el equipo que hará de puente lo primero es asegurarnos que tiene con
 
 En ella nos dirigimos al apartado de cambiar opciones de adaptador.
 
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/5.tiff" width="300"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/6.tiff" width="300"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/5.tiff" width="300"/> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/6.tiff" width="300"/>   
 
 Nos aparecerá una ventana con todos los adaptadores disponibles, seleccionamos en deseado y damos botón derecho sobre él y nos vamos a propiedades.   
 
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/7.tiff" width="300"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/7.tiff" width="300"/>   
 
 Una vez en propiedades, nos dirigimos a la pestaña de uso compartido y en el campo de selección ponemos nuestro adaptador ethernet que deberá tener conectado el cable desde nuestro equipo a la jetson. Con esto dotaremos de conexión internet a nuestra placa y podremos navegar por internet y descargar las librerías necesarias.   
 
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/8.tiff" width="300"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/8.tiff" width="300"/>   
 
 ## Actualización de la Jetson-NANO
 Para actualizar la placa deberemos ejecutar dos comandos.   
@@ -85,19 +85,19 @@ alumno2@jetson-2:~/Descargas$ sudo dpkg -i code-oss_1.32.3-arm64.deb
 ```
 
 Ahora podemos abrirlo y se vería como podemos observar en la imagen, pero nos hacen faltan una serie de extensiones para poder editar y lanzar nuestro código desde el propio VSCode.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/9.tiff" width="500"/>   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/10.tiff" width="500"/>   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/11.tiff" width="500"/>   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/12.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/9.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/10.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/11.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/12.tiff" width="500"/>   
 
 Para poder comenzar a usar la extensión de Python deberemos configurar la versión que vamos a utilizar para ello abrimos una línea de comando y escribimos:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/13.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/13.tiff" width="500"/>   
 
 Más tarde deberemos elegir la versión que deseamos, en nuestro caso la segunda.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/14.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/14.tiff" width="500"/>   
 
 Ahora ya podemos crear código y ejecutarlo en la misma ventana. Para poder ejecutarlo basta con hacer click derecho sobre el código y elegir la opción Ejecutar archivo Python en la terminal. Esto hará que en la parte inferior se nos habrá una nueva terminal que ejecuta el código, como podemos ver en el ejemplo de la imagen:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/15.tiff" width="500"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/15.tiff" width="500"/>   
 
 ___
 
@@ -137,16 +137,16 @@ alumno2@jetson-2:~$ sudo reboot now
 
 ### Script para movimiento del servo
 Para empezar deberemos importar las siguiente librerías (si no contamos con alguna de ellas en la bibliografía aparecerán enlaces a tutoriales para su instalación):   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/73.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/73.tiff"/>   
 
 Nos crearemos una variable para el servo, éste será nuestro objeto con el cual realizaremos las llamadas para cambiar el posicionamiento. Como vemos la función necesita como parámetro el número de canales, en nuestro caso siempre es 16 y es con el que hemos tenido mejor funcionamiento.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/74.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/74.tiff"/>   
 
 Para seleccionar la posición debemos manejar dos parámetros que corresponden al ángulo horizontal y al ángulo vertical. En la imagen podemos ver como servo[0] corresponde con el horizontal y servo[1] con el vertical. En este caso hemos seleccionado como posición inicial el ángulo 0º horizontal y 60º vertical.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/16.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/16.tiff"/>   
 
 Para hacer el efecto barrido solo es necesario hacer un bucle en el sentido horizontal desde el ángulo mínimo hasta el máximo y si se desea, pues retroceder invirtiendo el bucle inicial:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/17.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/17.tiff"/>   
 
 Si ejecutamos en script IAAR-MovimientoServo.py podremos ver todo esto en acción.
 
@@ -161,42 +161,42 @@ alumno2@jetson-2:~$ sudo apt-get install git cmake libpython3-dev python3-numpy
 
 ### Script Seguimiento de color
 Comenzamos a ver todo lo explicado sobre en código. Como siempre primero las importaciones necesarias.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/18.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/18.tiff"/>   
 
 Cargamos nuestro servo como hicimos en el otro punto. Y en este caso como queremos seleccionar el color, en el tutorial que seguimos nos enseñaron cómo crear una ventana con barras deslizadoras para escoger los parámetros. Nosotros no vamos a explicarlo, vendrá en el script y dejaremos un enlace a dicho video para mejor comprensión.   
 
 Deberemos configurar los siguientes parámetros: ancho y alto de la ventana y el modo de rotación. Esto último puede varias dependiendo de cómo se haya instalado la cámara, en nuestro caso es 0.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/19.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/19.tiff"/>   
 
 A continuación, tenemos que crear nuestra fuente de video, de donde sacaremos los frames que vamos a tratar. En este caso lo estamos haciendo desde cv2 pero más adelante veremos una forma alternativa para usarlo desde jetson.utils, que a nuestro parecer, nos ha resultado más sencillo.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/20.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/20.tiff"/>   
 
 Como hemos mencionado, tenemos que obtener un frame para tratarlo y así generar las observaciones sobre él.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/21.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/21.tiff"/>   
 
 Mediante CV2 vamos a encontrar los contornos en la imagen que cumplen nuestra condición, la de que sea el color que mediante los parámetros, hemos ajustado. Como puede que encontremos más de uno, vamos a ordenarlo con el criterio de primero los de mayor área, entendiendo que nuestro objeto va a ser la zona donde mayor número de pixeles detectemos como nuestro color y así evitamos pequeñas agrupaciones de pixeles de color similar o incluso pixeles de ruido.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/22.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/22.tiff"/>   
 
 Ahora comenzamos un bucle que para cada uno de los contornos detectados, calcularemos su área y su bbox. La función usada para obtener el bounding box nos devuelve su punto de la esquina superior izquierda y su ancho y largo, por lo que nos será fácil calcular la “caja”.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/23.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/23.tiff"/>   
 
 Vamos a dibujar el borde de esta caja sobre el frame en cuestión. Para poder aplicar el criterio que mencionamos antes, vamos a hacer un filtrado de las detecciones con área menos que valor 50. Ahora sí, podemos mostrar el rectángulo del bbox, para ello haciendo uso de funciones de cv2, quedaría tal que así:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/24.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/24.tiff"/>   
 
 Ahora calcularemos los ángulos necesarios para colocar el servo y poder hacer el tracking. Debemos calcular el centro del bbox, para ello sabiendo su esquina superior izquierda y su alto y ancho, podemos averiguar sus coordenadas X e Y. Según el tutorial, realizar el cálculo de esta forma puede llevar un pequeño error consigo que compensaremos calculando el error de paneo y tilt, es decir los ángulos horizontal y vertical respectivamente.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/25.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/25.tiff"/>   
 
 En dichos cálculos podemos pasarnos de rango y obtener valores mayores que los límites, para evitar eso deberemos comprobar el resultado de cada ángulo y si lo sobre pasa, asignarle el valor máximo para evitar errores a la hora de ejecutar.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/26.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/26.tiff"/>   
 
 Asignamos la posición como aprendimos anteriormente y mostramos el frame modificado en la ventana correspondiente:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/27.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/27.tiff"/>   
 
 Por último, tenemos la opción de cerrar todas las ventanas y finalizar el programa cerrando la cámara:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/28.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/28.tiff"/>   
 
 Todo el código se encuentra en el script IAAR-SeguimientoColor.py, a continuación, vamos a ver una captura de cómo se ve el programa en ejecución:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/29.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/29.tiff"/>   
 
 ### Ejecutar modelo
 En este apartado vamos ya a entrar en la base de conocimiento de este proyecto. Vamos a ejecutar un modelo de reconocimiento de objetos, pero en el repositorio que hemos seguido se encuentran muchas funcionalidades muy interesantes, como modelos de reconocimiento de imagen, segmentación, etc   
@@ -212,7 +212,7 @@ alumno2@jetson-2:~/Descargas/jetson-inference/build$ cmake ../
 ```
 
 Al ejecutar este comando, comenzará a instalar la librería necesaria y abrirá una ventana de instalación de los modelos como la que mostramos:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/30.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/30.tiff"/>   
 
 Después de instalar, nos aparecerá otra ventana de instalación de Pytorch. Si hemos seguido todos los tutoriales que hemos facilitado, además de esta memoria, deberemos tener especial cuidado en escoger la versión de Python 3.6 que es en la que hemos desarrollado, si se está usando otra, asegurarse de que es la misma que se tiene instalada en el equipo.   
 
@@ -228,31 +228,31 @@ alumno2@jetson-2:~/Descargas/jetson-inference/build$ sudo apt-get install v4l-ut
 Vamos a ver el código implementado para poder ejecutar un modelo de reconocimiento de objetos preentrenado y que se encuentre en el repositorio jetson-inference o si poseemos otro modelo con una extensión admitida, podremos utilizarlo. Las compatibilidades y modelos admitidos las explicaremos más adelante en otro apartado.   
 
 Las librerías que necesitaremos serán:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/31.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/31.tiff"/>   
 
 Lo siguiente es crear un parser de Python para poder cargar los parámetros a la hora de hacer la llamada a guión. En nuestro caso lo hemos configurado para que cargue un modelo que hemos entrenado nosotros mismos, que será uno de los siguientes apartados. En jetson-inference existe un script a modo de ejemplo llamado detectnet.py donde se podrá ver mejor esta parte si lo que se quiere es cargar uno de los modelos preentrenados.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/32.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/32.tiff"/>   
 
 Los modelos preentrenados son variados y detectan infinidad de objetos, pero hay algunos específicos para rostros como el facenet:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/33.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/33.tiff"/>   
 
 Para cargar el modelo el modelo tenemos que crear un objeto de la clase detectNet, es una de las clases de jetson-inference implementada en Python y C++, en nuestro caso estamos haciendo uso de la versión en Python, la definición es la siguiente:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/34.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/34.tiff"/>   
 
 Continuamos creando dos fuentes, una de video que será la que capture los frames de nuestra cámara y otra para generar la salida de video. Para la entrada debemos indicar la cámara y también configuramos la rotación. En puntos anteriores enseñamos cómo hacerlo con la librería OpenCV, esta vez lo haremos con jetson-utils:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/35.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/35.tiff"/>   
 
 Finalmente creamos un bucle para que todos los frames se estén mostrando por pantalla. Cargaremos un frame, buscaremos las detecciones con el método detect de nuestra red, que tiene la siguiente definición:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/36.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/36.tiff"/>   
 
 Como podemos ver, nos devuelve una lista de detecciones. Éstas tienen como atributos los siguientes(los cuales nos han resultado de gran utilidad en la implementación posterior):   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/37.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/37.tiff"/>   
 
 La propia función detect se encarga, mediante el tipo de overlay, de representar la información en al frame. Si por ejemplo detecta un plátano en la escena, por defecto dibujará un rectángulo alrededor de la fruta, con el nombre de la clase a la que pertenece la detección y el porcentaje que tiene de pertenecer a dicha clase. Esto en código quedaría de la siguiente manera:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/38.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/38.tiff"/>   
 
 Si queremos ejecutar el código, se encuentra implementado en el script IAAR-EjecutaModelo.py, debajo mostramos un ejemplo de cómo se vería la ventana de previsualización generada ejecutando un modelo preentrenado, por defecto se trata del ssd-mobilenet-v2:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/39.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/39.tiff"/>   
 
 ## Seguimiento de Detección
 En este apartado vamos a explicar el concepto final, cómo vamos a mezclar todos los conocimientos previos y los vamos a poner en común en el mismo script para crear nuestro programa, un script que, a partir de las percepciones de un modelo, haga un tracking de un rostro humano detectado.   
@@ -261,47 +261,47 @@ Lo necesario para este punto ya lo hemos explicado, salvo como entrenar a nuestr
 
 ### Script Seguimiento de modelo
 Comenzamos con las importaciones de las librerías que vamos a necesitar, en este caso son:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/40.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/40.tiff"/>   
 
 Para mejor comprensión, hemos dividido el main en varios pasos, donde en cada paso hemos intentado integrar el código en una función, para una mejor claridad y mayor facilidad a la hora de explicarlo.   
 
 Como primer paso nos creamos nuestro objeto servo que ya hemos aprendido a usar en anteriores puntos:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/41.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/41.tiff"/>   
 
 Después cargamos la red:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/42.tiff"/>   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/43.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/42.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/43.tiff"/>   
 
 Para poder obtener los frames necesitamos una fuente de entrada, en este caso nuestra cámara, aunque se podría utilizar un video ya grabado. También necesitaremos una fuente de salida, en este caso una ventana en el propio SO, también existen proyecto donde la salida es enviada a otro dispositivo, por ejemplo: retransmisiones en streaming o guardar el video en un servidor, ...   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/44.tiff"/>   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/45.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/44.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/45.tiff"/>   
 
 Vamos a comenzar ya con las detecciones y el movimiento del servo, es por ello que hemos optado por colocar el servo en una posición inicial desde la cual comenzará a barrer la sala donde se encuentre la cámara:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/46.tiff"/>   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/47.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/46.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/47.tiff"/>   
 
 Ahora sí, comenzamos a tratar las detecciones, usando el objeto cámara, capturamos un frame y mediante detect, obtenemos las detecciones que encuentra nuestro modelo en dicho frame. Dentro el método ya creado, tenemos la opción de que mediante el overlay, nos modifique el frame de tal manera de que pinte el bounding box de las detecciones, el nombre de la clase (que en este caso solo será Human fase) y el porcentaje con el que dicha detección pertenece a nuestra clase, todo esto se puede cambiar con las opciones “box”, “label”, “conf”y “none”.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/48.tiff"/>   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/49.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/48.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/49.tiff"/>   
 
 Ahora llegamos a un punto que en función de lo obtenido antes, realizaremos una cosa u otra. Si hemos detectado alguna cara, vamos a buscar la detección con mayor área, esto lo hacemos porque en caso de haber dos personas, vamos a trackear a la más cercana, que suele ser la que mayor área de bbox tenga.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/50.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/50.tiff"/>   
 
 Una vez tengamos escogida la detección, podemos usar varios atributos con los que cuenta esta clase, de todos ellos nosotros vamos a utilizar el centro del bbox, el ancho y el alto y su área para crear un criterio de selección de región de interés.   
 
 Aunque existen más atributos que hemos puesto para que puedan ser utilizados para crear criterios alternativos al nuestro:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/51.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/51.tiff"/>   
 
 Una vez escogido todo, solo tenemos que mover el servo, para ello calculamos su posición, como ya vimos en anteriores puntos de la memoria:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/52.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/52.tiff"/>   
 
 La única diferencia que encontramos en esta función con el método que hemos mencionado, es que anteriormente partíamos de la esquina superior izquierda del bbox de los contornos, pero esta vez la clase Detect ya nos da el centro de ese bounding box, por lo que la dos primeras líneas son solo para renombrar las variables para poder reciclar código. Tras esa pequeña aclaración solo basta utilizar la función para colocar el servo, que es muy simple: se pasa como parámetros los ángulos horizontal y vertical y se asignan al servo. Como ya hemos comprobado en la función calculaPosición, que los ángulos no sobrepasen los límites, no tenemos que preocuparnos por asignar un ángulo mayor que 180 o menos que 0.   
 
 Si no hemos detectado ningún rostro, el servo comienza a barrer la zona moviéndose horizontalmente, primero de izquierda a derecha y luego en sentido contrario.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/53.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/53.tiff"/>   
 
 Esto sería todo el código final, para poder ejecutarlo deberemos usar el script IAAR-SeguimientoModelo.py. Como muestra de la ejecución podemos ver la siguiente imagen:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/54.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/54.tiff"/>   
 
 ___
 
@@ -310,7 +310,7 @@ Como ya hemos nombrado antes, existen varios modelos ya establecidos en el repos
 
 ## Modelo SSD
 Es un tipo de modelo que vamos a utilizar para entrenar el nuestro propio, concretamente se lo vamos a usar para detección de objetos. Vamos a utilizar Pytorch y el conjunto de datos de Open Images. SDD-MobileNet es una arquitectura de red que es bastante popular para la detección de objetos en tiempo real para dispositivos móviles y dispositivos integrados, combina el detector SSD-300 Single-Shot MultiBox con una red troncal de Mobilenet (que es una red neuronal convolucional para aplicaciones de visión móvil).   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/55.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/55.tiff"/>   
 
 ## Configuración y entrenamiento
 A continuación, vamos a configurar el entrenamiento y descargar todo lo necesario para conseguirlo, pero antes queremos informar de algunas cosas a tener en cuenta y que hemos querido compartir porque ha sido una de las claves de este proyecto.   
@@ -346,7 +346,7 @@ Para procesar nuestro modelo solo bastaría con asegurarnos que en la función d
 
 ## Entrenamiento Google Colab
 Como hemos mencionado la Jetson posee unas limitaciones, es por ello que decidimos buscar una alternativa para un mejor entrenamiento y con mayor potencia computacional, es por ello que usamos la plataforma Google Colab.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/56.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/56.tiff"/>   
 
 Colab es un servicio cloud, basado en los Notebooks de Jupyter, que permite el uso gratuito de los GPUs y TPUs de Google, como librerías como: Scikit-learn, Pytorch, TensorFlow, Keras y OpenCV. Todo ello con Python 2.7 y 3.6, que aún no está disponible para R y Scala.   
 
@@ -355,17 +355,17 @@ Aunque tiene algunas limitaciones, que pueden consultarse en su página de FAQ, 
 Con colab se pueden crear notebooks o importar los que ya tengamos creados, además de compartirlos y exportarlos cuando queramos. Esta fluidez a la hora de manejar la información también es aplicable a las fuentes de datos que usemos en nuestros proyectos, de modo que podremos trabajar con información contenida en nuestro propio Google Drive, unidad de almacenamiento local, github e incluso otros sistemas de almacenamiento cloud, como S3 de Amazon.   
 
 Para empezar a trabajar con colab, tendremos que tener una cuenta de Google y acceder al servicio Google Drive. Una vez dentro, le daremos a Nuevo > Carpeta, poniéndolo el nombre que queremos, por ejemplo: “IAAR-Colab”.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/57.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/57.tiff"/>   
 
 Para crear nuestro primer Colab, entraremos dentro de la carpeta que hemos creado y daremos a Nuevo > Más > Colaboratory, a continuación, se abrirá un nuevo notebook:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/58.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/58.tiff"/>   
 
 Una vez hecho esto, hay que establecer el entorno de ejecución: pestaña Entorno de ejecución > Cambiar tipo de entorno de ejecución, tras lo que se abrirá la siguiente ventana:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/59.tiff"/>   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/60.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/59.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/60.tiff"/>   
 
 En nuestro caso indicaremos Python 3 y GPU. Para cargar los datos usaremos la opción de Google drive, para ello, ejecutaremos el código que aparece en la imagen. Nos aparecerá una URL a la que debemos entrar para iniciar sesión con la cuenta que deseemos vincular, ya que puede ser una distinta a propietaria del Colab. Nos dará un código de verificación que deberemos pegar en el campo de texto y una vez realizado con éxito todos estos pasos se deberían de ver como en la siguiente imagen:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/61.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/61.tiff"/>   
 
 Ahora para poder realizar el entrenamiento de forma correcta solo deberemos subir a nuestro drive la carpeta ssd, del repositorio jetson-inference para poder trabajar con los scritps que se encuentran en dicha carpeta.   
 
@@ -379,10 +379,10 @@ ___
 
 # Resultado y Conclusiones
 Uno de los problemas que encontramos en la fase de desarrollo era el cambio del modo sondeo a cambio de modo tracking. Debido a las vibraciones que generan los motores del servo, la imagen se distorsionaba y durante el cambio de posición encontraba otras detecciones, que cuando resultaban ser mayores que las de nuestra cara, hacían que el servo entrase en un bucle de cambio de posición, en otras palabras, se volvía loco. Esto se solucionó añadiendo un sleep al sondeo, así entre incremento de su posición horizontal y el siguiente, pasaba más tiempo y hacía un movimiento más suave, reduciendo las vibraciones, pero esto solo no fue suficiente, el cambio sustancial vino con un reentreno, es decir, cambiamos el modelo que estábamos usando.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/62.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/62.tiff"/>   
 
 Como hemos explicado, hemos usado Google Colab para realizar nuestros modelos, esto se debe a que primeramente entrenamos en la Jetson Nano, debido a las limitaciones técnicas hicimos una ejecución de un modelo con 5.000 imágenes y 2 generaciones, lo que no fue suficiente porque los ocurría, que en nuestra pared de fondo, tenemos colgada una guitarra y nos la detecta como cara humana:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/63.tiff"/>   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/63.tiff"/>   
 
 Esto, además de significar que nuestro modelo no reconoce del todo bien a las personas, nos trajo un problema en el cual no caímos, qué debe hacer nuestro programa cuando detecte a dos personas y realmente sean dos personas.   
 
@@ -397,19 +397,19 @@ ___
 # Resumen de los entrenamientos
 ## Modelo 15 Épocas y 10.000 imágenes
 El primer modelo que presentamos consta de: 10.000 imágenes de entrenamiento y 15 épocas. Hemos creado sus gráficas de evolución para poder entender cómo fue su proceso de entrenamiento:   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/64.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/65.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/66.tiff" width="300px">   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/64.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/65.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/66.tiff" width="300px">   
 
 Este modelo ya nos aportaba unos resultado realmente mejorados, la detección de la guitarra como falso positivo solo ocurría en contadas veces, podría ser debido a que la guitarra tiene dos piezas circulares de una proximidad simular a la de los ojos, pusimos un pañuelo sobre ellos y efectivamente el error se corrigió, pero quisimos ser más técnicos y hacer un mejor modelo aún, por lo que decidimos aumentar el número de épocas.   
 
 ## Modelo 25 Épocas y 10.000 imágenes
 El segundo modelo consta de 25 épocas y 10.000 imágenes, en cuanto a la ejecución sí vimos una leve mejora en falsos positivos, pero en las gráficas observamos un “Overfitting” por lo que decidimos realizar otro entrenamiento con el objetivo de hacer uso de un modelo que nos dé buenos resultados y unas gráficas correctas.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/67.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/68.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/69.tiff" width="300px">   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/67.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/68.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/69.tiff" width="300px">   
 
 ## Modelo 30 Épocas y 10.000 imágenes
 Nuestro último modelo es el que hemos utilizado para mover el programa final. Se trata de un modelo con 30 épocas y 10.000 imágenes de entrenamiento. Nos solucionó por completo nuestro problema de falsos positivos, al menos en nuestra zona de desarrollo, no hemos podido comprobar los resultados en otros espacios porque no nos fue posible, aunque nos hubiera gustado poder recopilar datos y hacer una comparativo en distintas salas y generar gráficas comparativas de falsos positivos entre los distintos modelos.   
 
 Las gráficas de este modelo nos han parecido muy correctas y coherentes, por ello no quisimos realizar ningún otro entrenamiento con mayores números. Aunque podría haber sido interesante de cara a saber si realmente merece la pena invertir tanto tiempo en un entrenamiento y la mejoría en cuanto a resultados.   
-<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/70.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/71.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/imagenes/72.tiff" width="300px">   
+<img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/70.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/71.tiff" width="300px"> <img src="https://github.com/byLiTTo/IAAR-SeguimientoRostro/blob/main/reports/figures/72.tiff" width="300px">   
 
 ___
 
